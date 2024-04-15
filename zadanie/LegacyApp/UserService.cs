@@ -7,11 +7,14 @@ namespace LegacyApp
         private bool IsDataCorrect(string firstName, string lastName, string email)
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
+            {
                 return false;
-            return !email.Contains("@") && !email.Contains(".");
+            }
+
+            return email.Contains("@") && email.Contains(".");
         }
 
-        private int CalculateAge(DateTime dateOfBirth)
+        public int CalculateAge(DateTime dateOfBirth)
         {
             var now = DateTime.Now;
             int age = now.Year - dateOfBirth.Year;
@@ -51,7 +54,7 @@ namespace LegacyApp
         
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
-            if (IsDataCorrect(firstName, lastName, email))
+            if (!IsDataCorrect(firstName, lastName, email))
                 return false;
 
             int age = CalculateAge(dateOfBirth);
